@@ -118,7 +118,7 @@ namespace MPowerPayments
 			return customer[key];
 		}
 
-		public bool create ()
+		public bool Create ()
 		{
 			bool result = false;
 			JObject payload = new JObject ();
@@ -142,7 +142,7 @@ namespace MPowerPayments
 			return result;
 		}
 
-		public bool confirm (string token)
+		public bool Confirm (string token)
 		{
 			JObject jsonData = utility.HttpGetRequest (setup.GetConfirmUrl () + token);
 			bool result = false;
