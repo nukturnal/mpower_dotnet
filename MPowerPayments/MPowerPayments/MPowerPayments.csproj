@@ -33,9 +33,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\..\..\Projects\mpower_csharp\mpower_csharp\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\..\..\..\..\Projects\mpower_csharp\mpower_csharp\bin\Debug\RestSharp.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />

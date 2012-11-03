@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -119,35 +118,59 @@ namespace MPowerPayments
 			return customer[key];
 		}
 
-		public string create() 
+		public bool create ()
 		{
-			JObject payload = new JObject();
+			bool result = false;
+			JObject payload = new JObject ();
 			invoice.Add ("items", items);
 			invoice.Add ("taxes", taxes);
-			payload.Add ("invoice",invoice);
+			payload.Add ("invoice", invoice);
 			payload.Add ("store", storeData);
 			payload.Add ("actions", actions);
 			payload.Add ("custom_data", customData);
-			string jsonData = JsonConvert.SerializeObject(payload);
-			JObject result = utility.HttpPostJson(setup.GetInvoiceUrl(),jsonData);
-			return result.ToString();
+			string jsonData = JsonConvert.SerializeObject (payload);
+			JObject jsonResult = utility.HttpPostJson (setup.GetInvoiceUrl (), jsonData);
+			ResponseText = jsonResult ["response_text"].ToString ();
+			ResponseCode = jsonResult ["response_code"].ToString ();
+			if (jsonResult ["response_code"].ToString () == "00") {
+				Status = MPowerCheckout.SUCCESS;
+				ResponseText = jsonResult ["description"].ToString ();
+				result = true;
+			} else {
+				Status = MPowerCheckout.FAIL;
+			}
+			return result;
 		}
 
 		public bool confirm (string token)
 		{
-			JObject result = utility.HttpGetRequest(setup.GetConfirmUrl()+token);
-			invoice = utility.ParseJSON(result["invoice"]);
-			taxes = utility.ParseJSON(result["taxes"]);
-			customData = utility.ParseJSON(result["custom_data"]);
-			storeData = utility.ParseJSON(result["store"]);
-			customer = utility.ParseJSON(result["customer"]);
+			JObject jsonData = utility.HttpGetRequest (setup.GetConfirmUrl () + token);
+			bool result = false;
 
-			try{
-				receiptUrl = result["receipt_url"].ToString();
-			}catch(NullReferenceException){}
+			if (jsonData.Count > 0) {
+				Status = jsonData["status"].ToString();
+				invoice = utility.ParseJSON (jsonData ["invoice"]);
+				taxes = utility.ParseJSON (jsonData ["taxes"]);
+				customData = utility.ParseJSON (jsonData ["custom_data"]);
+				storeData = utility.ParseJSON (jsonData ["store"]);
 
+				if(jsonData["status"].ToString() == "completed"){
+					ResponseText = "Checkout Invoice has been paid";
+					ResponseCode = "00";
+					result = true;
+					customer = utility.ParseJSON (jsonData ["customer"]);
+					receiptUrl = (string)jsonData["receipt_url"];
+				}else{
+					ResponseText = "Checkout Invoice has not been paid";
+					ResponseCode = "1003";
+				} 
+			} else {
+				Status = MPowerCheckout.FAIL;
+				ResponseCode = "1002";
+				ResponseText = "Invoice Not Found";
+			}
 
-			return true;
+			return result;
 		}
 	}
 }
