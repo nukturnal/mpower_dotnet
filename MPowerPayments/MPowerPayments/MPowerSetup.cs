@@ -6,10 +6,10 @@ namespace MPowerPayments
 {
 	public class MPowerSetup
 	{
-		private const string LIVE_CHECKOUT_INVOICE_BASE_URL = "http://localhost:3000/api/v1/checkout-invoice/create";
-		private const string TEST_CHECKOUT_INVOICE_BASE_URL = "http://localhost:3000/sandbox-api/v1/checkout-invoice/create";
-		private const string LIVE_CHECKOUT_CONFIRM_BASE_URL = "http://localhost:3000/api/v1/checkout-invoice/confirm/";
-		private const string TEST_CHECKOUT_CONFIRM_BASE_URL = "http://localhost:3000/sandbox-api/v1/checkout-invoice/confirm/";
+		private const string LIVE_CHECKOUT_INVOICE_BASE_URL = "https://app.mpowerpayments.com/api/v1/checkout-invoice/create";
+		private const string TEST_CHECKOUT_INVOICE_BASE_URL = "https://app.mpowerpayments.com/sandbox-api/v1/checkout-invoice/create";
+		private const string LIVE_CHECKOUT_CONFIRM_BASE_URL = "https://app.mpowerpayments.com/api/v1/checkout-invoice/confirm/";
+		private const string TEST_CHECKOUT_CONFIRM_BASE_URL = "https://app.mpowerpayments.com/sandbox-api/v1/checkout-invoice/confirm/";
 
 		public string MasterKey { get; set; }
 		public string PublicKey { get; set; }
