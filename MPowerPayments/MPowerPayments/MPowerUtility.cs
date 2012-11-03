@@ -53,6 +53,18 @@ namespace MPowerPayments
 			return JObject.Parse(response);
 		}
 
+		public JObject ParseJSON(object jsontext)
+		{
+			string JsonString = "{}";
+
+			try{
+				JsonString = jsontext.ToString();
+			}catch(NullReferenceException){
+			}
+
+			return JObject.Parse(JsonString);
+		}
+
 	}
 }
 

@@ -14,11 +14,13 @@ namespace MPowerPayments
 		private JObject items = new JObject();
 		private JObject taxes = new JObject();
 		private JObject customData = new JObject();
+		private JObject customer = new JObject();
 		private JObject actions = new JObject();
 		private MPowerUtility utility;
 		private string invoiceUrl { get; set; }
 		private string cancelUrl { get; set; }
 		private string returnUrl { get; set; }
+		private string receiptUrl { get; set; }
 
 		public MPowerCheckoutInvoice (MPowerSetup setup, MPowerStore store)
 		{
@@ -87,6 +89,11 @@ namespace MPowerPayments
 			return invoiceUrl;
 		}
 
+		public string GetReceiptUrl () 
+		{
+			return receiptUrl;
+		}
+
 		public string GetCancelUrl () 
 		{
 			return (string)actions["cancel_url"];
@@ -107,6 +114,11 @@ namespace MPowerPayments
 			return customData[key];
 		}
 
+		public object GetCustomerInfo (string key)
+		{
+			return customer[key];
+		}
+
 		public string create() 
 		{
 			JObject payload = new JObject();
@@ -121,10 +133,21 @@ namespace MPowerPayments
 			return result.ToString();
 		}
 
-		public string confirm (string token)
+		public bool confirm (string token)
 		{
 			JObject result = utility.HttpGetRequest(setup.GetConfirmUrl()+token);
-			return result.ToString();
+			invoice = utility.ParseJSON(result["invoice"]);
+			taxes = utility.ParseJSON(result["taxes"]);
+			customData = utility.ParseJSON(result["custom_data"]);
+			storeData = utility.ParseJSON(result["store"]);
+			customer = utility.ParseJSON(result["customer"]);
+
+			try{
+				receiptUrl = result["receipt_url"].ToString();
+			}catch(NullReferenceException){}
+
+
+			return true;
 		}
 	}
 }
