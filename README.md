@@ -68,10 +68,10 @@ Params for addItem function `AddItem(name_of_item,quantity,unit_price,total_pric
 ## Pushing invoice to MPower server and getting your URL
 
     if(co.Create()) {
-      Console.WriteLine (invoice.ResponseText);
-      Console.WriteLine ("Invoice URL: "+invoice.GetInvoiceUrl());
+      Console.WriteLine (co.ResponseText);
+      Console.WriteLine ("Invoice URL: "+co.GetInvoiceUrl());
     }else{
-      Console.WriteLine ("Error Message: "+invoice.ResponseText);
+      Console.WriteLine ("Error Message: "+co.ResponseText);
     }
 
 ## Contributing
