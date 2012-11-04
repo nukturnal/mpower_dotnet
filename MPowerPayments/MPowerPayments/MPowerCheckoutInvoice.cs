@@ -131,9 +131,9 @@ namespace MPowerPayments
 			string jsonData = JsonConvert.SerializeObject (payload);
 			JObject jsonResult = utility.HttpPostJson (setup.GetInvoiceUrl (), jsonData);
 			ResponseCode = jsonResult ["response_code"].ToString ();
-			if (jsonResult ["response_code"].ToString () == "00") {
+			if (ResponseCode == "00") {
 				Status = MPowerCheckout.SUCCESS;
-				invoiceUrl = jsonResult ["response_text"].ToString ();
+				SetInvoiceUrl(jsonResult ["response_text"].ToString ());
 				ResponseText = jsonResult ["description"].ToString ();
 				result = true;
 			} else {
