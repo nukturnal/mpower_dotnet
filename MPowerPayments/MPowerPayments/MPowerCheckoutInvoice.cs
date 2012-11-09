@@ -135,6 +135,7 @@ namespace MPowerPayments
 				Status = MPowerCheckout.SUCCESS;
 				SetInvoiceUrl(jsonResult ["response_text"].ToString ());
 				ResponseText = jsonResult ["description"].ToString ();
+				Token = jsonResult ["token"].ToString();
 				result = true;
 			} else {
 				ResponseText = jsonResult ["response_text"].ToString ();
