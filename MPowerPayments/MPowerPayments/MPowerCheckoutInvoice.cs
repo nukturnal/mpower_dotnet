@@ -6,20 +6,20 @@ namespace MPowerPayments
 {
 	public class MPowerCheckoutInvoice : MPowerCheckout
 	{
-		private MPowerSetup setup;
-		private MPowerStore store;
-		private JObject invoice = new JObject();
-		private JObject storeData = new JObject();
-		private JObject items = new JObject();
-		private JObject taxes = new JObject();
-		private JObject customData = new JObject();
-		private JObject customer = new JObject();
-		private JObject actions = new JObject();
-		private MPowerUtility utility;
-		private string invoiceUrl { get; set; }
-		private string cancelUrl { get; set; }
-		private string returnUrl { get; set; }
-		private string receiptUrl { get; set; }
+		protected MPowerSetup setup;
+		protected MPowerStore store;
+		protected JObject invoice = new JObject();
+		protected JObject storeData = new JObject();
+		protected JObject items = new JObject();
+		protected JObject taxes = new JObject();
+		protected JObject customData = new JObject();
+		protected JObject customer = new JObject();
+		protected JObject actions = new JObject();
+		protected MPowerUtility utility;
+		protected string invoiceUrl { get; set; }
+		protected string cancelUrl { get; set; }
+		protected string returnUrl { get; set; }
+		protected string receiptUrl { get; set; }
 
 		public MPowerCheckoutInvoice (MPowerSetup setup, MPowerStore store)
 		{
