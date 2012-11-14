@@ -4,7 +4,7 @@ namespace MPowerPayments
 {
 	public class MPowerSetup
 	{
-		private const string ROOT_URL_BASE = "http://localhost:3000";
+		private const string ROOT_URL_BASE = "https://app.mpowerpayments.com";
 		private const string LIVE_CHECKOUT_INVOICE_BASE_URL = "/api/v1/checkout-invoice/create";
 		private const string TEST_CHECKOUT_INVOICE_BASE_URL = "/sandbox-api/v1/checkout-invoice/create";
 		private const string LIVE_CHECKOUT_CONFIRM_BASE_URL = "/api/v1/checkout-invoice/confirm/";
