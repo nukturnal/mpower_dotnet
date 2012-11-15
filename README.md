@@ -1,7 +1,9 @@
-MPower_DotNET
-=============
-
+MPower .NET Client API
+======================
 MPower Payments .NET Client Library
+
+## Offical Documentation
+http://mpowerpayments.com/developers/docs/dotnet.html
 
 ## Installation
 
@@ -40,9 +42,14 @@ When a returnURL is not set, MPower will redirect the customer to the receipt pa
     store.ReturnUrl = "CHECKOUT_RETURN_URL";
 
 ## Create your Checkout Invoice
-Please note that MPowerCheckoutInvoice Class requires two parameters which should be instances of MPowerSetup & MPowerStore respectively
+Please note that `MPowerCheckoutInvoice` Class requires two parameters which should be instances of MPowerSetup & MPowerStore respectively
 
     MPowerCheckoutInvoice co = new MPowerCheckoutInvoice (setup, store);
+
+## Create your Onsite Payment Request Invoice
+Please note that `MPowerOnsiteInvoice` Class requires two parameters which should be instances of MPowerSetup & MPowerStore respectively
+
+    MPowerOnsiteInvoice co = new MPowerOnsiteInvoice (setup, store);
 
 Params for addItem function `AddItem(name_of_item,quantity,unit_price,total_price,[description])`
 
@@ -73,6 +80,29 @@ Params for addItem function `AddItem(name_of_item,quantity,unit_price,total_pric
     }else{
       Console.WriteLine ("Error Message: "+co.ResponseText);
     }
+
+## Onsite Payment Request(OPR) Charge
+First step is to take the customers mpower account alias, this could be the phoneno, username or mpower account number.
+pass this as a param for the `create` action of the `MPower::Onsite::Invoice` class instance. MPower will return an OPR TOKEN after the request is successfull. The customer will also receieve a confirmation TOKEN.
+        
+    if(co.Create("CUSTOMER_MPOWER_USERNAME_OR_PHONE")) {
+      Console.WriteLine (co.ResponseText);
+      Console.WriteLine ("OPR Token: "+co.Token);
+    }else{
+      Console.WriteLine ("Error Message: "+co.ResponseText);
+    }
+
+Second step requires you to accept the confirmation TOKEN from the customer, add your OPR Token and issue the charge. Upon successfull charge you should be able to access the digital receipt URL and other objects outlined in the offical docs.
+
+    if(co.Charge("OPR_TOKEN","CUSTOMER_CONFIRM_TOKEN")) {
+      Console.WriteLine (co.ResponseText);
+      Console.WriteLine ("Receipt URL: "+co.GetReceiptUrl());
+    }else{
+      Console.WriteLine ("Error Message: "+co.ResponseText);
+    }
+
+## Download MPower .NET Demo
+https://github.com/nukturnal/MPower_DotNet_Demo
 
 ## Contributing
 
