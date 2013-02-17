@@ -101,6 +101,19 @@ Second step requires you to accept the confirmation TOKEN from the customer, add
       Console.WriteLine ("Error Message: "+co.ResponseText);
     }
 
+## DirectPay Request
+You can pay any MPower account directly via your third party apps. This is particularly excellent for implementing your own Adaptive payment solutions ontop of MPower. Please note that `MPowerDirectPay` Class expects one parameter which should be an instance of the MPowerSetup Class
+
+    MPowerDirectPay direct_pay = new MPowerDirectPay (setup);
+    if(direct_pay.CreditAccount("MPOWER_CUSTOMER_USERNAME_OR_PHONENO",50)){
+      Console.WriteLine(direct_pay.Description);
+      Console.WriteLine (direct_pay.Status);
+      Console.WriteLine (direct_pay.ResponseText);
+    }else{
+      Console.WriteLine(direct_pay.ResponseText);
+      Console.WriteLine (direct_pay.Status);
+    }
+
 ## Download MPower .NET Demo
 https://github.com/nukturnal/MPower_DotNet_Demo
 
