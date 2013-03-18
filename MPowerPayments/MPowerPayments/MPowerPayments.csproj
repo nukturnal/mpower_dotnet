@@ -43,6 +43,7 @@
     <Compile Include="MPowerUtility.cs" />
     <Compile Include="MPowerOnsiteInvoice.cs" />
     <Compile Include="MPowerDirectPay.cs" />
+    <Compile Include="MPowerDirectCard.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
