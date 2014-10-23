@@ -1,0 +1,8 @@
+C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments.Tests\bin\Debug\MPowerPayments.Tests.dll
+C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments.Tests\bin\Debug\MPowerPayments.Tests.pdb
+C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments.Tests\bin\Debug\MPowerPayments.dll
+C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments.Tests\bin\Debug\Newtonsoft.Json.dll
+C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments.Tests\bin\Debug\MPowerPayments.pdb
+C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments.Tests\obj\Debug\MPowerPayments.Tests.csprojResolveAssemblyReference.cache
+C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments.Tests\obj\Debug\MPowerPayments.Tests.dll
+C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments.Tests\obj\Debug\MPowerPayments.Tests.pdb
