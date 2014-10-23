@@ -17,6 +17,8 @@ namespace MPowerPayments
 		private const string TEST_DIRECT_PAY_CREDIT_URL = "/sandbox-api/v1/direct-pay/credit-account";
 		private const string LIVE_DIRECT_CREDITCARD_CHARGE_URL = "/api/v1/direct-card/processcard";
 		private const string TEST_DIRECT_CREDITCARD_CHARGE_URL = "/sandbox-api/v1/direct-card/processcard";
+	    private const string LIVE_DIRECT_MOBILE_CHARGE_URL = "/api/v1/direct-mobile/charge";
+	    private const string LIVE_DIRECT_MOBILE_STATUS_URL = "/api/v1/direct-mobile/status";
 
 
 		public string MasterKey { get; set; }
@@ -92,6 +94,19 @@ namespace MPowerPayments
 			}
 		}
 
+	    public string GetDirectMobileChargeUrl()
+	    {
+	        return this.Mode == "live"
+	            ? ROOT_URL_BASE + LIVE_DIRECT_MOBILE_CHARGE_URL
+	            : null;
+	    }
+
+        public string GetDirectMobileStatusUrl()
+        {
+            return this.Mode == "live"
+                ? ROOT_URL_BASE + LIVE_DIRECT_MOBILE_STATUS_URL
+                : null;
+        }
 	}
 }
 
