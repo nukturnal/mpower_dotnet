@@ -1,6 +1,0 @@
-C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments\bin\Debug\MPowerPayments.dll
-C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments\bin\Debug\MPowerPayments.pdb
-C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments\bin\Debug\Newtonsoft.Json.dll
-C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments\obj\Debug\MPowerPayments.csprojResolveAssemblyReference.cache
-C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments\obj\Debug\MPowerPayments.dll
-C:\Workspace\Development\Libraries\mpower_dotnet\MPowerPayments\MPowerPayments\obj\Debug\MPowerPayments.pdb

@@ -114,6 +114,45 @@ You can pay any MPower account directly via your third party apps. This is parti
       Console.WriteLine (direct_pay.Status);
     }
 
+## DirectMobile
+Currently there is only support for MTN Mobile Money.
+
+### Charge
+You can directly charge a mobile wallet via a USSD bill prompt (the user gets a USSD screen on their mobile phone that prompts him/her to make payment). 
+```c#
+MPowerDirectMobile directMobile = new MPowerDirectMobile(setup, store);
+var response = directMobile.Charge("Alfred", "0244000001", "alfred@example.com", "MTN", 1);
+if (!response) 
+{
+    Console.WriteLine(directMobile.Status); // FAIL
+}
+else
+{
+    Console.WriteLine(directMobile.Status); // SUCCESS
+    Console.WriteLine(directMobile.Token); // 95c45ebe083a495392b6e1a4
+    Console.WriteLine(directMobile.TransactionId);
+}
+```
+
+### Confirm
+You can use the `Token` obtained in the previous step to confirm the status of the payment programmatically.
+```c#
+var confirmed = directMobile.Confirm("95c45ebe083a495392b6e1a4");
+if (!confirmed)
+{
+    Console.WriteLine(directMobile.TransactionStatus); // pending || cancelled
+    Console.WriteLine(directMobile.ResponseText);
+}
+else
+{
+    Console.WriteLine(directMobile.TransactionStatus); // complete
+    Console.WriteLine(directMobile.ResponseText);
+    Console.WriteLine(directMobile.Description);
+    Console.WriteLine(directMobile.TransactionId);
+    Console.WriteLine(directMobile.MobileInvoiceNumber);
+}
+```
+
 ## Download MPower .NET Demo
 https://github.com/nukturnal/MPower_DotNet_Demo
 
