@@ -47,13 +47,13 @@ namespace MPowerPayments
             var jsonData = payload.ToString();
             var jsonResult = Utility.HttpPostJson(_setup.GetDirectMobileChargeUrl(), jsonData);
             ResponseCode = jsonResult.Value<string>("response_code");
+            ResponseText = jsonResult.Value<string>("response_text");
             if (ResponseCode != "00")
             {
                 Status = FAIL;
                 return false;
             }
             Status = SUCCESS;
-            ResponseText = jsonResult.Value<string>("response_text");
             Description = jsonResult.Value<string>("description");
             TransactionId = jsonResult.Value<string>("transaction_id");
             Token = jsonResult.Value<string>("token");

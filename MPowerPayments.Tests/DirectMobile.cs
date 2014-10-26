@@ -8,9 +8,9 @@ namespace MPowerPayments.Tests
     {
         private readonly MPowerSetup _setup = new MPowerSetup()
         {
-            MasterKey = "8ddbcff0-ee7b-4986-96aa-b7003fd37157",
-            PrivateKey = "live_private_MC5E0gc6pXoe5jFICY8WdERFsvk",
-            Token = "73f26869ee40513a58a2",
+            MasterKey = "",
+            PrivateKey = "",
+            Token = "",
             Mode = "live",
         };
 
@@ -23,7 +23,7 @@ namespace MPowerPayments.Tests
         public void DirectMobileCharge()
         {
             var directMobile = new MPowerDirectMobile(_setup, _store);
-            var response = directMobile.Charge("Alfred Rowe", "0244124661"
+            var response = directMobile.Charge("Alfred Rowe", "0244000001"
                 , "alfred@example.com", "MTN", 1);
             Assert.IsTrue(response);
         }
