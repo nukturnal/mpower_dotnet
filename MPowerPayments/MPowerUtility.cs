@@ -6,64 +6,64 @@ using System.Text;
 
 namespace MPowerPayments
 {
-	public class MPowerUtility
-	{
-		private MPowerSetup setup;
+    public class MPowerUtility
+    {
+        private MPowerSetup setup;
 
-		public MPowerUtility (MPowerSetup setup)
-		{
-			this.setup = setup;
-		}
+        public MPowerUtility(MPowerSetup setup)
+        {
+            this.setup = setup;
+        }
 
-		public JObject HttpPostJson (string url, string payload)
-		{
-			var bytes = Encoding.Default.GetBytes(payload);
+        public JObject HttpPostJson(string url, string payload)
+        {
+            var bytes = Encoding.Default.GetBytes(payload);
 
-			WebClient client = new WebClient();
-			client.Headers.Add(HttpRequestHeader.UserAgent,
-			       "MPower Checkout API .NET client v1 aka Don Nigalon");
+            var client = CreateWebClient();
+            client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            var response = client.UploadData(url, "POST", bytes);
 
-			client.Headers.Add("mp-master-key", setup.MasterKey);
-			client.Headers.Add("mp-private-key", setup.PrivateKey);
-			client.Headers.Add("mp-public-key", setup.PublicKey);
-			client.Headers.Add("mp-token", setup.Token);
-			client.Headers.Add("mp-mode", setup.Mode);
-			client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            return JObject.Parse(Encoding.Default.GetString(response));
+        }
 
-			var response = client.UploadData(url, "POST", bytes);
-			
-			return JObject.Parse(Encoding.Default.GetString(response));
-		}
+        public JObject HttpGetRequest(string url)
+        {
+            var client = CreateWebClient();
+            var response = client.DownloadString(url);
 
-		public JObject HttpGetRequest(string url)
-		{
-			WebClient client = new WebClient();
-			client.Headers.Add(HttpRequestHeader.UserAgent,
-			       "MPower Checkout API .NET client v1 aka Don Nigalon");
-			
-			client.Headers.Add("mp-master-key", setup.MasterKey);
-			client.Headers.Add("mp-private-key", setup.PrivateKey);
-			client.Headers.Add("mp-public-key", setup.PublicKey);
-			client.Headers.Add("mp-token", setup.Token);
-			client.Headers.Add("mp-mode", setup.Mode);
+            return JObject.Parse(response);
+        }
 
-			var response = client.DownloadString(url);
+        public JObject ParseJSON(object jsontext)
+        {
+            string JsonString = "{}";
 
-			return JObject.Parse(response);
-		}
+            try
+            {
+                JsonString = jsontext.ToString();
+            }
+            catch (NullReferenceException)
+            {
+            }
 
-		public JObject ParseJSON(object jsontext)
-		{
-			string JsonString = "{}";
+            return JObject.Parse(JsonString);
+        }
 
-			try{
-				JsonString = jsontext.ToString();
-			}catch(NullReferenceException){
-			}
+        private WebClient CreateWebClient()
+        {
+            WebClient client = new WebClient();
+            client.Headers.Add(HttpRequestHeader.UserAgent,
+                   "MPower Checkout API .NET client v1 aka Don Nigalon");
 
-			return JObject.Parse(JsonString);
-		}
+            client.Headers.Add("mp-master-key", setup.MasterKey);
+            client.Headers.Add("mp-private-key", setup.PrivateKey);
+            client.Headers.Add("mp-public-key", setup.PublicKey);
+            client.Headers.Add("mp-token", setup.Token);
+            client.Headers.Add("mp-mode", setup.Mode);
 
-	}
+            return client;
+        }
+
+    }
 }
 
